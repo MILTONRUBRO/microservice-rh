@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "tb_worker")
 public class Worker implements Serializable{
@@ -22,6 +24,18 @@ public class Worker implements Serializable{
 	private Long id;
 	private String name;
 	private Double dailyIncome;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Double getDailyIncome() {
+		return dailyIncome;
+	}
 	
 	public Worker() {
 		
