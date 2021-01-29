@@ -3,7 +3,9 @@ package com.devmos.hrworker.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ import com.devmos.hrworker.repositories.WorkerRepository;
 @RequestMapping("api/workers")
 public class WorkerController {
 	
+	private static Logger logger = org.slf4j.LoggerFactory.getLogger(WorkerController.class);
+	@Autowired
+	private Environment enviroment;
 	private WorkerRepository workerRepository;
 	
 	@Autowired
@@ -34,6 +39,8 @@ public class WorkerController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Worker> findById(@PathVariable("id") Long id){
+		logger.info("PORT = " + enviroment.getProperty("local.server.port"));
+		
 		Optional<Worker> possibleWorker = workerRepository.findById(id);
 		
 		if(!possibleWorker.isPresent()) {
